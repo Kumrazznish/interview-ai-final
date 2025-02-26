@@ -5,7 +5,7 @@ import { Loader2, Bot, ChevronDown, ChevronUp, Search } from "lucide-react";
 import { useTheme } from "next-themes";
 
 const GEMINI_API_KEY = "AIzaSyAjWxQEVa72lu4gFuMUGbaxzgVmHMsRSGI";
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
 const ROLES = ["HR", "Employee", "Head"];
 const JOB_TYPES = ["Full Stack Developer", "Backend Developer", "Frontend Developer", "Data Scientist"];
