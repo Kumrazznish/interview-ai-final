@@ -9,7 +9,7 @@ import { api } from "../../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 import MeetingModal from "@/components/MeetingModal";
 import LoaderUI from "@/components/LoaderUI";
-import { Loader2Icon, Sun, Moon } from "lucide-react";
+import { Loader2Icon, Sparkles, Zap, Award, TrendingUp } from "lucide-react";
 import MeetingCard from "@/components/MeetingCard";
 import Chatbot from "@/components/Chatbot";
 
@@ -19,7 +19,6 @@ export default function Home() {
   const interviews = useQuery(api.interviews.getMyInterviews);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<"start" | "join">();
-  const [darkMode, setDarkMode] = useState(true); // Toggle state for dark/light mode
 
   const handleQuickAction = (title: string) => {
     switch (title) {
@@ -38,38 +37,80 @@ export default function Home() {
 
   if (isLoading) return <LoaderUI />;
 
+  const glassmorphismStyle = {
+    background: 'rgba(255, 255, 255, 0.1)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+  };
+
   return (
-    <div >
-      <div className="container max-w-7xl mx-auto p-6 bg-white text-black dark:bg-gray-950 dark:text-white">
-        
+    <div className="particles-bg min-h-screen">
+      <div className="container max-w-7xl mx-auto p-6">
 
         {/* WELCOME SECTION */}
-        <div className="rounded-lg bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-white p-6 border border-gray-300 dark:border-gray-800 shadow-sm mb-10">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-            Welcome back!
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            {isInterviewer
-              ? "Manage your interviews and review candidates effectively"
-              : "Access your upcoming interviews and preparations"}
-          </p>
-         
+        <div className="rounded-2xl p-8 mb-10 glass neon-glow float-animation" style={glassmorphismStyle}>
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Sparkles className="w-8 h-8 text-yellow-500" />
+              <h1 className="text-5xl font-bold gradient-text">
+                Welcome to NextGen Interviews
+              </h1>
+              <Zap className="w-8 h-8 text-blue-500" />
+            </div>
+            <p className="text-xl text-muted-foreground mb-6">
+              {isInterviewer
+                ? "Advanced AI-powered platform for conducting and managing interviews"
+                : "Your comprehensive AI interview preparation and practice platform"}
+            </p>
+            <div className="flex items-center justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <Award className="w-5 h-5 text-green-500" />
+                <span>AI-Powered Analysis</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-blue-500" />
+                <span>Real-time Feedback</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-purple-500" />
+                <span>Advanced Features</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* STATS SECTION */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
+          <div className="text-center p-4 rounded-xl glass" style={glassmorphismStyle}>
+            <div className="text-3xl font-bold text-blue-500 mb-1">7</div>
+            <p className="text-sm text-muted-foreground">AI Tools</p>
+          </div>
+          <div className="text-center p-4 rounded-xl glass" style={glassmorphismStyle}>
+            <div className="text-3xl font-bold text-green-500 mb-1">∞</div>
+            <p className="text-sm text-muted-foreground">Practice Sessions</p>
+          </div>
+          <div className="text-center p-4 rounded-xl glass" style={glassmorphismStyle}>
+            <div className="text-3xl font-bold text-purple-500 mb-1">24/7</div>
+            <p className="text-sm text-muted-foreground">AI Availability</p>
+          </div>
+          <div className="text-center p-4 rounded-xl glass" style={glassmorphismStyle}>
+            <div className="text-3xl font-bold text-orange-500 mb-1">100%</div>
+            <p className="text-sm text-muted-foreground">Personalized</p>
+          </div>
         </div>
 
         {isInterviewer ? (
           <>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
               {QUICK_ACTIONS.map((action) => (
-                <ActionCard
-                  key={action.title}
+                <div key={action.title} className="ripple-effect">
+                  <ActionCard
                   action={action}
                   onClick={() => handleQuickAction(action.title)}
-                />
+                  />
+                </div>
               ))}
             </div>
-            <div className="mt-10">
-          <Chatbot />
-        </div>
 
             <MeetingModal
               isOpen={showModal}
@@ -80,9 +121,9 @@ export default function Home() {
           </>
         ) : (
           <>
-            <div>
-              <h1 className="text-3xl font-bold text-black dark:text-white">Your Interviews</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">View and join your scheduled interviews</p>
+            <div className="mb-8">
+              <h1 className="text-3xl font-bold gradient-text">Your Interviews</h1>
+              <p className="text-muted-foreground mt-1">View and join your scheduled interviews</p>
             </div>
 
             <div className="mt-8">
@@ -93,12 +134,18 @@ export default function Home() {
               ) : interviews.length > 0 ? (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {interviews.map((interview) => (
-                    <MeetingCard key={interview._id} interview={interview} />
+                    <div key={interview._id} className="ripple-effect">
+                      <MeetingCard interview={interview} />
+                    </div>
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-12 text-gray-600 dark:text-gray-400">
-                  You have no scheduled interviews at the moment
+                <div className="text-center py-12 p-8 rounded-2xl glass" style={glassmorphismStyle}>
+                  <div className="text-6xl mb-4">🎯</div>
+                  <h3 className="text-xl font-semibold mb-2">No Interviews Scheduled</h3>
+                  <p className="text-muted-foreground">
+                    Start practicing with our AI tools to prepare for your next opportunity!
+                  </p>
                 </div>
               )}
               
@@ -108,7 +155,9 @@ export default function Home() {
         )}
 
         {/* AI ENGLISH ASSISTANT CHATBOT */}
-        
+        <div className="mt-16">
+          <Chatbot />
+        </div>
       </div>
     </div>
   );
