@@ -2,36 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Mic, 
-  MicOff, 
-  Play, 
-  Pause, 
-  Square,
-  Volume2,
-  VolumeX,
-  RotateCcw,
-  TrendingUp,
-  MessageSquare,
-  Clock,
-  Target,
-  Award,
-  Brain,
-  Zap,
-  BarChart3,
-  AlertTriangle,
-  CheckCircle,
-  Lightbulb,
-  Download,
-  RefreshCw,
-  Settings,
-  Headphones,
-  Waveform,
-  Activity,
-  Eye,
-  Users,
-  BookOpen
-} from "lucide-react";
+import { Mic, MicOff, Play, Pause, Square, Volume2, VolumeX, RotateCcw, TrendingUp, MessageSquare, Clock, Target, Award, Brain, Zap, BarChart3, AlertTriangle, CheckCircle, Lightbulb, Download, RefreshCw, Settings, Headphones, AudioWaveform as Waveform, Activity, Eye, Users, BookOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
